@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, ImageBackground} from 'react-native';
 import styled from 'styled-components/native';
 import {Text} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -25,45 +25,58 @@ const Container = styled.View<ContainerProps>`
 `;
 
 const HomeText = styled(Text)`
-  text-align: left;
-  padding: 20px 10px;
-  font-size: 24px;
-  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
 `;
 
 const PokemonList = styled.FlatList`
   flex: 1;
   border-radius: 10px;
-  background-color: '#afccfa';
+`;
+
+const ListWrapper = styled.View`
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.4);
 `;
 
 function Home({navigation}: HomeProps) {
   const insets = useSafeAreaInsets();
 
-  const {data, loading, error} = useFetch({
+  const {data, loading} = useFetch({
     query: () => getPokemons(),
   });
 
   return (
     <Container paddingTop={insets.top} paddingBottom={insets.bottom}>
-      <Header />
-      <HomeText>Wich Pokémon would you choose?</HomeText>
-      {loading ? (
-        <ActivityIndicator color="white" size="large" />
-      ) : (
-      <PokemonList
-        key={2}
-        contentContainerStyle={{
-          borderRadius: 20,
-          overflow: 'hidden',
-          paddingTop: 5,
-        }}
-        data={data?.results}
-        numColumns={2}
-        renderItem={i => <ListItem navigation={navigation} item={i?.item} />}
-        keyExtractor={item => item?.name}
-      />
-      )}
+      <ImageBackground
+        source={require('../../assets/img/paisagem.jpeg')}
+        style={{flex: 1}}>
+        <ListWrapper>
+          <Header />
+          <HomeText>Wich Pokémon would you choose?</HomeText>
+        </ListWrapper>
+        {loading ? (
+          <ActivityIndicator color="white" size="large" />
+        ) : (
+          <PokemonList
+            key={2}
+            contentContainerStyle={{
+              borderRadius: 20,
+              overflow: 'hidden',
+              paddingTop: 5,
+            }}
+            data={data?.results}
+            numColumns={2}
+            renderItem={i => (
+              <ListItem navigation={navigation} item={i?.item} />
+            )}
+            keyExtractor={item => item?.name}
+          />
+        )}
+      </ImageBackground>
     </Container>
   );
 }

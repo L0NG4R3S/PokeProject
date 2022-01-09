@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {Text, useTheme} from 'react-native-paper';
+import {Text} from 'react-native-paper';
 import {HeightIcon, WeightIcon} from '../../assets';
 
 type DetailCardProps = {

@@ -15,7 +15,7 @@ type ItemCardProps = {
   color: string;
 };
 
-const ItemCard = styled.TouchableOpacity<ItemCardProps>`
+const ItemCard = styled.View<ItemCardProps>`
   padding: 15px;
   background-color: ${({color}) => color};
   border-top-left-radius: 20px;

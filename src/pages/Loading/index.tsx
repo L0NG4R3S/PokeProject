@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
-import {Image} from 'react-native';
+import {Image, ImageBackground} from 'react-native';
 import styled from 'styled-components/native';
-import {Text} from 'react-native-paper';
+import {ActivityIndicator} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {StackNavigationProp} from '@react-navigation/stack';
 
@@ -16,8 +16,6 @@ type ContainerProps = {
 
 const Container = styled.View<ContainerProps>`
   flex: 1;
-  padding-top: ${({paddingTop}) => paddingTop || 0}px;
-  padding-bottom: ${({paddingBottom}) => paddingBottom || 0}px;
 `;
 
 const ImageView = styled.View`
@@ -25,16 +23,14 @@ const ImageView = styled.View`
   justify-content: center;
 `;
 
+const OpacityView = styled.View`
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.6);
+`;
+
 const LoadingView = styled.View`
   flex: 0.5;
   justify-content: center;
-`;
-
-const LoadingText = styled(Text)`
-  align-self: center;
-  margin-top: 30px;
-  font-size: 20px;
-  font-weight: bold;
 `;
 
 function Loading({navigation}: Props) {
@@ -48,19 +44,25 @@ function Loading({navigation}: Props) {
 
   return (
     <Container paddingTop={insets.top} paddingBottom={insets.bottom}>
-      <ImageView>
-        <Image
-          style={{alignSelf: 'center'}}
-          source={require('../../assets/img/pokemon.png')}
-        />
-      </ImageView>
-      <LoadingView>
-        <Image
-          style={{alignSelf: 'center', width: 95, height: 95}}
-          source={require('../../assets/img/pokebola.png')}
-        />
-        <LoadingText>Loading...</LoadingText>
-      </LoadingView>
+      <ImageBackground
+        source={require('../../assets/img/loadingBackground.png')}
+        style={{flex: 1}}>
+        <OpacityView>
+          <ImageView>
+            <Image
+              style={{alignSelf: 'center'}}
+              source={require('../../assets/img/pokemon.png')}
+            />
+          </ImageView>
+          <LoadingView>
+            <Image
+              style={{alignSelf: 'center', width: 95, height: 95}}
+              source={require('../../assets/img/pokebola.png')}
+            />
+            <ActivityIndicator style={{marginTop: 30}} color="gray" size="large" />
+          </LoadingView>
+        </OpacityView>
+      </ImageBackground>
     </Container>
   );
 }

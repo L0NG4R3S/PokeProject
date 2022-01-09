@@ -8,10 +8,6 @@ type CharacteristicItemProps = {
   color: string;
 };
 
-type ItemCardProps = {
-  showBorder: boolean;
-};
-
 type CharacTextProps = {
   textAlign: string;
 };
@@ -23,7 +19,7 @@ const Card = styled.View`
 
 const CharacText = styled(Text)<CharacTextProps>`
   flex: 1;
-  font-size: 18px;
+  font-size: 16px;
   text-align: ${({textAlign}) => textAlign};
 `;
 
@@ -32,6 +28,8 @@ const ProgressBarView = styled.View`
 `;
 
 function CharacteristicItem({item, color}: CharacteristicItemProps) {
+  const formatNumber = parseFloat("0." + item?.base_stat).toFixed(2)
+
   return (
     <Card>
       <CharacText numberOfLines={1} textAlign="left">
@@ -41,7 +39,7 @@ function CharacteristicItem({item, color}: CharacteristicItemProps) {
         {item?.base_stat}
       </CharacText>
       <ProgressBarView>
-        <ProgressBar progress={0.5} color={color} />
+        <ProgressBar key={item?.stat?.name} progress={Number(formatNumber)} color={color} />
       </ProgressBarView>
     </Card>
   );

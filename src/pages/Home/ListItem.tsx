@@ -66,8 +66,8 @@ function ListItem({navigation, item}: ListItemProps) {
   return (
     <ItemCard color={theme.colors[item.name]} onPress={()=>navigation.navigate('PokemonDetails', {item: data})}>
       {loading ? (
-        <ActivityIndicator color="white" />
-      ) : (
+        <ActivityIndicator style={{alignSelf: 'center', flex: 1}} color="white" />
+      ) : error ? <PokemonNameText numberOfLines={1}>Loading Error</PokemonNameText> : (
         <>
           <PokemonNameText numberOfLines={1}>{uppercaseFirstLetter(item.name)}</PokemonNameText>
           <CardView>
