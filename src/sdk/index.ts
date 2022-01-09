@@ -11,7 +11,6 @@ export const getPokemons = () => {
       return data;
     })
     .catch(err => {
-      console.log('ERROR', err);
       throw new Error(err);
     });
 };
@@ -23,7 +22,6 @@ export const getPokemonDetails = ({ url }: getPokemonDetailsProps) => {
       return data;
     })
     .catch(err => {
-      console.log('ERROR', err);
       throw new Error(err);
     });
 };

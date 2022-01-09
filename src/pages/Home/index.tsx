@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {ActivityIndicator} from 'react-native';
 import styled from 'styled-components/native';
 import {Text} from 'react-native-paper';
@@ -7,6 +7,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {useFetch} from '../../hooks';
 import {getPokemons} from '../../sdk';
 import ListItem from './ListItem';
+import Header from './Header';
 
 type HomeProps = {
   navigation: StackNavigationProp<any, any>;
@@ -43,13 +44,10 @@ function Home({navigation}: HomeProps) {
     query: () => getPokemons(),
   });
 
-  useEffect(() => {
-    console.log('DATA', data?.results);
-  }, [data, loading, error]);
-
   return (
     <Container paddingTop={insets.top} paddingBottom={insets.bottom}>
-      <HomeText>Qual pokémon você escolheria?</HomeText>
+      <Header />
+      <HomeText>Wich Pokémon would you choose?</HomeText>
       {loading ? (
         <ActivityIndicator color="white" size="large" />
       ) : (

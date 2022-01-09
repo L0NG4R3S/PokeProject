@@ -13,6 +13,7 @@ const Navigator = () => {
       <RootStack.Navigator initialRouteName="Loading" screenOptions={{ headerShown: false }}>
         <RootStack.Screen name="Loading" component={Pages.Loading} />
         <RootStack.Screen name="Home" component={Pages.Home} />
+        <RootStack.Screen name="PokemonDetails" component={Pages.PokemonDetails} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

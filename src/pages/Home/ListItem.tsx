@@ -1,11 +1,11 @@
 import React from 'react';
 import {Image, ActivityIndicator} from 'react-native';
 import styled from 'styled-components/native';
-import {Text, Card, useTheme} from 'react-native-paper';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {Text, useTheme} from 'react-native-paper';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useFetch} from '../../hooks';
 import {getPokemonDetails} from '../../sdk';
+import {uppercaseFirstLetter} from '../../service'
 
 type ListItemProps = {
   navigation: StackNavigationProp<any, any>;
@@ -16,7 +16,7 @@ type ItemCardProps = {
   color: string;
 };
 
-const ItemCard = styled(Card)<ItemCardProps>`
+const ItemCard = styled.TouchableOpacity<ItemCardProps>`
   flex: 1;
   margin: 5px;
   padding: 15px;
@@ -64,12 +64,12 @@ function ListItem({navigation, item}: ListItemProps) {
   });
 
   return (
-    <ItemCard color={theme.colors[item.name]}>
+    <ItemCard color={theme.colors[item.name]} onPress={()=>navigation.navigate('PokemonDetails', {item: data})}>
       {loading ? (
         <ActivityIndicator color="white" />
       ) : (
         <>
-          <PokemonNameText numberOfLines={1}>{item.name}</PokemonNameText>
+          <PokemonNameText numberOfLines={1}>{uppercaseFirstLetter(item.name)}</PokemonNameText>
           <CardView>
             <InformationView>
               {data?.types?.map(item => {

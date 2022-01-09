@@ -15,6 +15,10 @@ const theme = {
     wartortle: '#6942f5',
     blastoise: '#468DA4',
     caterpie: '#6dde7b',
+
+    gray_light: '#E0E0E0',
+    light_blue: '#03c6fc',
+    dark_blue: '#05a2e6',
   },
 };
 
